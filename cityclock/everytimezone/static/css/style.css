@@ -1,0 +1,24 @@
+html {
+    text-align: center;
+    padding-top: 160px;
+}
+
+a {
+    color: darkgoldenrod;
+    text-decoration:none;
+    font-weight: 200px;
+    text-align: center;
+    font-size: large;
+    font-weight: 100;
+}
+
+a:hover {
+    color: goldenrod;
+}
+
+h1 {
+    padding:0 0 10px 0;
+    margin:10px 0 20px 0;
+    font-family: 'Muli', sans-serif; 
+    font-weight:normal;
+}
