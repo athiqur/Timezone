@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.conf import settings
 from datetime import datetime
 from django.utils import timezone
+from django.conf import settings
 
 common_timezones = {
     "London": "Europe/London",
@@ -10,6 +10,14 @@ common_timezones = {
     "New York": "America/New_York",
     "Chennai": "Asia/Calcutta",
 }
+
+
+def get_city(timeZone):
+    for city, zone in common_timezones.items():
+        if zone == timeZone:
+            return city
+    return " "
+
 
 format = "%H:%M:%S"
 
@@ -30,17 +38,9 @@ def home(request):
 def set_timezone(request):
     if request.method == "POST":
         request.session["django_timezone"] = request.POST["timezone"]
-        settings.TIME_ZONE = request.POST["timezone"]
-        settings.DEFAULT_CITY = get_city(request.POST["timezone"])
+        request.session["django_city"] = get_city(request.POST["timezone"])
         return redirect(reverse("home"))
     else:
         return render(
             request, "time/time.html", {"timezones": common_timezones}
         )
-
-
-def get_city(timeZone):
-    for city, zone in common_timezones.items():
-        if zone == timeZone:
-            return city
-    return " "
